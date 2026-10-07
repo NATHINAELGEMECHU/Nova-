@@ -1,41 +1,2174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NOVA ADDIS — Local Services. Built on Trust.</title>
-<link rel="icon" href="assets/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA ADDIS — Local Service Trust Platform</title>
+
+  <!-- Typography: Poppins (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM & CSS VARIABLES
+       ============================================================ */
+    :root {
+      /* Brand Palette */
+      --primary: #1557C0;
+      --primary-hover: #0f46a0;
+      --bright-blue: #1689E8;
+      --cyan: #16C6D4;
+      
+      --dark: #111111;
+      --white: #FFFFFF;
+      --bg: #F7F9FC;
+      --soft-blue: #EAF4FF;
+      --border: #DDE3EA;
+
+      /* Text Colors */
+      --text-primary: #111111;
+      --text-secondary: #5F6B7A;
+      --text-muted: #8A95A3;
+
+      /* Status Colors */
+      --success: #16A36A;
+      --success-bg: #E8F8F0;
+      --warning: #F4A62A;
+      --warning-bg: #FEF6E8;
+      --error: #D64545;
+      --error-bg: #FDF2F2;
+
+      /* Typography */
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      /* Radius */
+      --radius-btn: 8px;
+      --radius-input: 8px;
+      --radius-card: 14px;
+      --radius-modal: 16px;
+      --radius-pill: 999px;
+
+      /* Shadow */
+      --shadow-subtle: 0 4px 20px rgba(17, 17, 17, 0.06);
+      --shadow-hover: 0 8px 28px rgba(17, 17, 17, 0.1);
+
+      /* Layout */
+      --max-width: 1240px;
+      --header-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.5;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--bright-blue);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      color: var(--primary);
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* Container */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================================
+       BUTTONS & INPUTS
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-weight: 500;
+      border-radius: var(--radius-btn);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease-out;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background-color: var(--white);
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+    .btn-secondary:hover {
+      background-color: var(--soft-blue);
+      border-color: var(--bright-blue);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--soft-blue);
+    }
+
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 13px;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .input, .select, .textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-input);
+      background-color: var(--white);
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .input:focus, .select:focus, .textarea:focus {
+      border-color: var(--bright-blue);
+      box-shadow: 0 0 0 3px rgba(22, 137, 232, 0.15);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .form-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge-success { background: var(--success-bg); color: var(--success); }
+    .badge-warning { background: var(--warning-bg); color: #B47200; }
+    .badge-error { background: var(--error-bg); color: var(--error); }
+    .badge-neutral { background: #EAEFF5; color: var(--text-secondary); }
+
+    /* ============================================================
+       NAVIGATION HEADER
+       ============================================================ */
+    .header {
+      background-color: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--cyan), var(--bright-blue));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 6px 0;
+      position: relative;
+    }
+
+    .nav-links a.active, .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .role-switcher {
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      padding: 3px;
+      border-radius: var(--radius-btn);
+      border: 1px solid var(--border);
+    }
+
+    .role-btn {
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.15s ease;
+    }
+
+    .role-btn.active {
+      background-color: var(--white);
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    /* Mobile Bottom Nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      z-index: 99;
+      padding: 8px 0;
+    }
+
+    .mobile-nav-items {
+      display: flex;
+      justify-content: space-around;
+      list-style: none;
+    }
+
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-secondary);
+      gap: 2px;
+    }
+
+    .mobile-nav-item.active {
+      color: var(--primary);
+    }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero-section {
+      padding: 64px 0 48px;
+      background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+
+    .hero-search-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-preview-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+
+    .hero-preview-badge {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: linear-gradient(135deg, var(--cyan), var(--bright-blue));
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* ============================================================
+       CARDS & SECTIONS
+       ============================================================ */
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .category-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .category-card:hover {
+      border-color: var(--bright-blue);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .category-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--soft-blue);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .category-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    /* Provider Grid */
+    .provider-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .provider-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .provider-card:hover {
+      box-shadow: var(--shadow-subtle);
+      border-color: #CBD5E1;
+    }
+
+    .provider-header {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .provider-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      object-fit: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--text-secondary);
+      font-size: 20px;
+    }
+
+    .provider-info h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .provider-title {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .provider-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .rating {
+      color: #F4A62A;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .services-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 16px 0;
+    }
+
+    .service-tag {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Trust Section Features */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .trust-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+    }
+
+    .trust-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--soft-blue);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .trust-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .trust-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       PROFILE PAGE & DETAIL VIEWS
+       ============================================================ */
+    .profile-hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 0;
+    }
+
+    .profile-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .profile-main-info {
+      display: flex;
+      gap: 24px;
+    }
+
+    .profile-avatar-lg {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--soft-blue);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 700;
+      border: 3px solid var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .portfolio-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    .portfolio-img {
+      width: 100%;
+      height: 140px;
+      background: #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .portfolio-info {
+      padding: 12px;
+    }
+
+    .portfolio-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .portfolio-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================================
+       DASHBOARD & TABLE LAYOUTS
+       ============================================================ */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+      padding: 32px 0;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      border-radius: var(--radius-btn);
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .sidebar-link:hover, .sidebar-link.active {
+      background: var(--soft-blue);
+      color: var(--primary);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 20px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .data-table th, .data-table td {
+      padding: 14px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: #F8FAFC;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================================
+       MODAL & TOAST
+       ============================================================ */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(17, 17, 17, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: var(--radius-modal);
+      width: 100%;
+      max-width: 520px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      transform: translateY(10px);
+      transition: transform 0.2s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      background: var(--dark);
+      color: var(--white);
+      padding: 12px 20px;
+      border-radius: var(--radius-btn);
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideIn 0.2s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark);
+      color: #94A3B8;
+      padding: 48px 0 24px;
+      margin-top: 64px;
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links a {
+      color: #94A3B8;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    /* Timeline component */
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 32px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border);
+      z-index: 1;
+    }
+
+    .timeline-step {
+      position: relative;
+      z-index: 2;
+      background: var(--white);
+      padding: 0 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .timeline-node {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .timeline-step.completed .timeline-node {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .timeline-step.completed {
+      color: var(--primary);
+    }
+
+    /* ============================================================
+       RESPONSIVE BREAKPOINTS
+       ============================================================ */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .dashboard-layout { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .mobile-nav { display: block; }
+      body { padding-bottom: 60px; }
+    }
+
+    @media (max-width: 600px) {
+      .trust-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 34px; }
+    }
+  </style>
 </head>
 <body>
-<a class="skip" href="#app">Skip to content</a>
-<header class="hd">
-  <div class="wrap hd-in">
-    <a href="#/home" class="logo" aria-label="NOVA ADDIS home"><span class="lg"><img src="assets/logo.png" alt=""></span><b>NOVA ADDIS</b></a>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">☰</button>
-    <nav class="nav" id="nav" aria-label="Main">
-      <div class="links">
-        <a href="#/home" data-n="home">Home</a><a href="#/find" data-n="find">Find a Service</a><a href="#/categories" data-n="categories">Categories</a><a href="#/requests" data-n="requests">My Requests</a><a href="#/about" data-n="about">About</a>
+
+  <!-- HEADER NAVIGATION -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="#" class="logo" onclick="navigateTo('home')">
+        <div class="logo-mark"><img src="logo.png" alt=""></div>
+        <span>NOVA ADDIS</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#" id="nav-home" class="active" onclick="navigateTo('home')">Home</a></li>
+        <li><a href="#" id="nav-search" onclick="navigateTo('search')">Find a Service</a></li>
+        <li><a href="#" id="nav-categories" onclick="navigateTo('categories')">Categories</a></li>
+        <li><a href="#" id="nav-requests" onclick="navigateTo('requests')">My Requests</a></li>
+        <li><a href="#" id="nav-about" onclick="navigateTo('about')">About</a></li>
+        <li><a href="#" id="nav-trust" onclick="navigateTo('trust')">Trust & Safety</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <!-- Mode / Role Switcher -->
+        <div class="role-switcher">
+          <button class="role-btn active" id="btn-role-customer" onclick="switchRole('customer')">Customer</button>
+          <button class="role-btn" id="btn-role-provider" onclick="switchRole('provider')">Provider</button>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="navigateTo('search')">Request Service</button>
       </div>
-      <div class="acts">
-        <button class="lnk" data-act="signin">Sign In</button>
-        <a class="btn ghost" href="#/p/setup">Create Account</a>
-        <a class="btn" href="#/p/dash">Offer a Service</a>
+    </div>
+  </header>
+
+  <!-- MAIN DYNAMIC CONTENT CONTAINER -->
+  <main id="app-root"></main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">NOVA ADDIS</div>
+          <p>IDEAS INTO DIGITAL SOLUTIONS</p>
+          <p style="margin-top: 12px; font-size: 13px;">Connecting customers with trusted local professionals across Addis Ababa, Ethiopia.</p>
+        </div>
+        <div>
+          <h4 style="color: var(--white); margin-bottom: 16px;">Platform</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="navigateTo('search')">Find Services</a></li>
+            <li><a href="#" onclick="navigateTo('categories')">Categories</a></li>
+            <li><a href="#" onclick="navigateTo('trust')">Trust Model</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: var(--white); margin-bottom: 16px;">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="navigateTo('about')">About Us</a></li>
+            <li><a href="#" onclick="navigateTo('business-model')">Business Model</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: var(--white); margin-bottom: 16px;">Location</h4>
+          <p style="font-size: 13px;">Addis Ababa, Ethiopia</p>
+          <p style="font-size: 12px; margin-top: 8px; color: #64748B;">© 2026 NOVA ADDIS. Demo Prototype.</p>
+        </div>
       </div>
-    </nav>
+    </div>
+  </footer>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-nav">
+    <ul class="mobile-nav-items">
+      <li class="mobile-nav-item active" onclick="navigateTo('home')">
+        <span>Home</span>
+      </li>
+      <li class="mobile-nav-item" onclick="navigateTo('search')">
+        <span>Search</span>
+      </li>
+      <li class="mobile-nav-item" onclick="navigateTo('requests')">
+        <span>Requests</span>
+      </li>
+      <li class="mobile-nav-item" onclick="switchRole(state.currentRole === 'customer' ? 'provider' : 'customer')">
+        <span id="mobile-role-label">Provider</span>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- MODAL CONTAINER -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Modal Header</h3>
+        <button class="modal-close" onclick="closeModalDirect()">&times;</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
   </div>
-</header>
-<main id="app" tabindex="-1"></main>
-<footer class="ft"><div class="wrap ft-in">
-  <a href="#/home" class="logo"><span class="lg"><img src="assets/logo.png" alt="NOVA ADDIS"></span><b>NOVA ADDIS</b></a>
-  <span class="tag">LOCAL SERVICES. BUILT ON TRUST.</span>
-  <span class="sm">Addis Ababa, Ethiopia · Demo prototype · <button class="lnk faint" data-act="reset">Reset demo</button></span>
-</div></footer>
-<nav class="mnav" aria-label="Mobile"></nav>
-<div id="toast" role="status" aria-live="polite"></div>
-<div id="modal" class="modal" hidden><div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt"><h3 id="mt"></h3><form id="mform"></form></div></div>
-<script src="script.js"></script>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ============================================================
+       JAVASCRIPT APP LOGIC & STATE
+       ============================================================ -->
+  <script>
+    /* ------------------------------------------------------------
+       DEMO SEED DATA & LOCALSTORAGE INITIALIZATION
+       ------------------------------------------------------------ */
+    const INITIAL_PROVIDERS = [
+      {
+        id: 'p1',
+        name: 'Dawit Abebe',
+        title: 'Phone & Electronics Repair Specialist',
+        category: 'Phone Repair',
+        rating: 4.8,
+        reviewsCount: 24,
+        completedCount: 48,
+        location: 'Bole, Addis Ababa',
+        experience: '5+ Years',
+        verified: true,
+        bio: 'Certified technician offering hardware screen replacement, battery upgrades, and micro-soldering with 100% genuine replacement parts.',
+        services: [
+          { id: 's1', name: 'Screen Repair & Replacement', price: '1,200 ETB', desc: 'Fix cracked or non-responsive phone displays.' },
+          { id: 's2', name: 'Battery Replacement', price: '800 ETB', desc: 'High-quality battery installation with warranty.' },
+          { id: 's3', name: 'Software Flashing & OS Restore', price: '500 ETB', desc: 'Resolve boot loops, unlock devices, software fixes.' }
+        ],
+        portfolio: [
+          { title: 'iPhone 13 Screen Renewal', desc: 'Original OLED replacement completed in 45 minutes.', category: 'Screen Repair' },
+          { title: 'Samsung S21 Board Repair', desc: 'Fixed liquid damage and restored power rail.', category: 'Electronics' }
+        ],
+        reviews: [
+          { customer: 'Sample Customer', rating: 5, date: '2026-09-15', comment: 'Dawit fixed my phone screen within 1 hour! Excellent service.' },
+          { customer: 'Helina T.', rating: 4.5, date: '2026-08-28', comment: 'Honest about pricing and fast turn-around.' }
+        ]
+      },
+      {
+        id: 'p2',
+        name: 'Sample Electricians Studio',
+        title: 'Licensed Residential & Commercial Electrician',
+        category: 'Electrical',
+        rating: 4.9,
+        reviewsCount: 38,
+        completedCount: 72,
+        location: 'Kazanchis, Addis Ababa',
+        experience: '8 Years',
+        verified: true,
+        bio: 'Professional electrical maintenance, circuit breaker setup, wiring inspection, and generator installation.',
+        services: [
+          { id: 's4', name: 'House Wiring & Inspection', price: '2,500 ETB', desc: 'Complete household electrical diagnostics.' },
+          { id: 's5', name: 'Generator Line Integration', price: '3,000 ETB', desc: 'Automatic & manual transfer switch setups.' }
+        ],
+        portfolio: [
+          { title: 'Apartment Complex Rewiring', desc: '3-phase electrical installation in Kazanchis.', category: 'Electrical' }
+        ],
+        reviews: [
+          { customer: 'Abebe K.', rating: 5, date: '2026-09-20', comment: 'Very professional, arrived promptly and solved breaker issues.' }
+        ]
+      },
+      {
+        id: 'p3',
+        name: 'Bethlehem Tadesse',
+        title: 'Full Stack Web & UI Developer',
+        category: 'Web Development',
+        rating: 5.0,
+        reviewsCount: 19,
+        completedCount: 31,
+        location: 'Mexico, Addis Ababa',
+        experience: '4 Years',
+        verified: true,
+        bio: 'Building responsive, fast web platforms and modern interfaces tailored for local Ethiopian enterprises.',
+        services: [
+          { id: 's6', name: 'Business Website Development', price: '12,000 ETB', desc: 'Custom website built with modern UI/UX.' }
+        ],
+        portfolio: [
+          { title: 'E-Commerce Marketplace', desc: 'Local shop showcase site.', category: 'Web Development' }
+        ],
+        reviews: []
+      }
+    ];
+
+    const INITIAL_REQUESTS = [
+      {
+        id: 'REQ-1001',
+        providerId: 'p1',
+        providerName: 'Dawit Abebe',
+        customerName: 'Sample Customer',
+        serviceName: 'Screen Repair & Replacement',
+        status: 'In Progress', // Pending, Accepted, In Progress, Completed, Cancelled
+        date: '2026-10-06',
+        preferredTime: 'Morning (9:00 AM)',
+        location: 'Bole Atlas, Addis Ababa',
+        description: 'iPhone 11 glass cracked after fall. Touch still works fine.',
+        timeline: [
+          { status: 'Request Sent', time: 'Oct 06, 09:30 AM', completed: true },
+          { status: 'Request Accepted', time: 'Oct 06, 10:15 AM', completed: true },
+          { status: 'Service Started', time: 'Oct 07, 02:00 PM', completed: true },
+          { status: 'Service Completed', time: '-', completed: false }
+        ]
+      }
+    ];
+
+    // Global App State
+    let state = {
+      currentRole: 'customer', // 'customer' or 'provider'
+      currentPage: 'home',
+      providers: JSON.parse(localStorage.getItem('na_providers')) || INITIAL_PROVIDERS,
+      requests: JSON.parse(localStorage.getItem('na_requests')) || INITIAL_REQUESTS,
+      selectedProviderId: 'p1',
+      selectedRequestId: 'REQ-1001',
+      searchQuery: '',
+      selectedCategory: 'All',
+      notifications: [
+        { id: 'n1', title: 'Service In Progress', text: 'Dawit Abebe started working on REQ-1001.', read: false, time: '2h ago' }
+      ]
+    };
+
+    function saveState() {
+      localStorage.setItem('na_providers', JSON.stringify(state.providers));
+      localStorage.setItem('na_requests', JSON.stringify(state.requests));
+    }
+
+    /* ------------------------------------------------------------
+       ROUTING & NAVIGATION
+       ------------------------------------------------------------ */
+    function navigateTo(page, params = {}) {
+      state.currentPage = page;
+      if (params.providerId) state.selectedProviderId = params.providerId;
+      if (params.requestId) state.selectedRequestId = params.requestId;
+      if (params.category) state.selectedCategory = params.category;
+      
+      // Update nav active link
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      const activeNav = document.getElementById(`nav-${page}`);
+      if (activeNav) activeNav.classList.add('active');
+
+      renderApp();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchRole(role) {
+      state.currentRole = role;
+      document.getElementById('btn-role-customer').classList.toggle('active', role === 'customer');
+      document.getElementById('btn-role-provider').classList.toggle('active', role === 'provider');
+      document.getElementById('mobile-role-label').textContent = role === 'customer' ? 'Provider Mode' : 'Customer Mode';
+      
+      showToast(`Switched to ${role.toUpperCase()} View`);
+      if (role === 'provider') {
+        navigateTo('provider-dashboard');
+      } else {
+        navigateTo('home');
+      }
+    }
+
+    /* ------------------------------------------------------------
+       RENDER ENGINE
+       ------------------------------------------------------------ */
+    function renderApp() {
+      const root = document.getElementById('app-root');
+      
+      if (state.currentRole === 'provider' && state.currentPage.startsWith('provider')) {
+        root.innerHTML = renderProviderLayout();
+        return;
+      }
+
+      switch (state.currentPage) {
+        case 'home':
+          root.innerHTML = renderHome();
+          break;
+        case 'search':
+          root.innerHTML = renderSearch();
+          break;
+        case 'categories':
+          root.innerHTML = renderCategories();
+          break;
+        case 'provider-detail':
+          root.innerHTML = renderProviderProfile();
+          break;
+        case 'request-service':
+          root.innerHTML = renderRequestServiceForm();
+          break;
+        case 'requests':
+          root.innerHTML = renderMyRequests();
+          break;
+        case 'request-detail':
+          root.innerHTML = renderRequestDetail();
+          break;
+        case 'about':
+          root.innerHTML = renderAbout();
+          break;
+        case 'trust':
+          root.innerHTML = renderTrustPage();
+          break;
+        case 'business-model':
+          root.innerHTML = renderBusinessModel();
+          break;
+        case 'provider-dashboard':
+          root.innerHTML = renderProviderLayout();
+          break;
+        default:
+          root.innerHTML = renderHome();
+      }
+    }
+
+    /* ------------------------------------------------------------
+       PAGE TEMPLATES: HOME
+       ------------------------------------------------------------ */
+    function renderHome() {
+      return `
+        <!-- HERO -->
+        <section class="hero-section">
+          <div class="container hero-grid">
+            <div>
+              <span class="hero-eyebrow">NOVA ADDIS — TRUSTED LOCAL SERVICES</span>
+              <h1 class="hero-title">Find Skilled Professionals You Can Trust.</h1>
+              <p class="hero-subtitle">Discover verified local experts, compare genuine work samples, inspect customer feedback, and request service directly.</p>
+              
+              <div class="hero-search-card">
+                <div style="display: flex; gap: 10px;">
+                  <input type="text" id="hero-search-input" class="input" placeholder="What service do you need? (e.g. Phone Repair)" />
+                  <button class="btn btn-primary" onclick="handleHeroSearch()">Find Service</button>
+                </div>
+                <div style="display: flex; gap: 12px; font-size: 13px; color: var(--text-secondary);">
+                  <span>Popular:</span>
+                  <a href="#" onclick="navigateTo('search', {category: 'Phone Repair'})">Phone Repair</a>
+                  <a href="#" onclick="navigateTo('search', {category: 'Electrical'})">Electrical</a>
+                  <a href="#" onclick="navigateTo('search', {category: 'Web Development'})">Web Dev</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- HERO PREVIEW CARD -->
+            <div class="hero-preview-card">
+              <span class="hero-preview-badge">Featured Verified Provider</span>
+              <div class="provider-header">
+                <div class="provider-avatar">DA</div>
+                <div class="provider-info">
+                  <h3>Dawit Abebe</h3>
+                  <div class="provider-title">Phone Repair Specialist</div>
+                  <div class="provider-meta">
+                    <span class="rating">★ 4.8</span>
+                    <span style="color: var(--text-muted);">(24 reviews)</span>
+                    <span class="badge badge-success">✓ Verified</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="services-tags">
+                <span class="service-tag">Screen Repair</span>
+                <span class="service-tag">Battery Swap</span>
+                <span class="service-tag">Micro-Soldering</span>
+              </div>
+
+              <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">"48 completed services in Bole area with guaranteed genuine parts."</p>
+
+              <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary btn-sm btn-block" onclick="navigateTo('provider-detail', {providerId: 'p1'})">View Profile</button>
+                <button class="btn btn-secondary btn-sm btn-block" onclick="navigateTo('request-service', {providerId: 'p1'})">Request Service</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CATEGORIES SECTION -->
+        <section class="section">
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title">Explore Service Categories</h2>
+              <p class="section-subtitle">Find local specialists organized by trade and expertise.</p>
+            </div>
+
+            <div class="categories-grid">
+              ${renderCategoryCard('Phone Repair', '📱')}
+              ${renderCategoryCard('Electrical', '⚡')}
+              ${renderCategoryCard('Electronics', '💻')}
+              ${renderCategoryCard('Plumbing', '🚰')}
+              ${renderCategoryCard('Mechanics', '🔧')}
+              ${renderCategoryCard('Photography', '📷')}
+              ${renderCategoryCard('Tutoring', '📚')}
+              ${renderCategoryCard('Web Development', '🌐')}
+            </div>
+          </div>
+        </section>
+
+        <!-- TRUST PHILOSOPHY -->
+        <section class="section" style="background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+          <div class="container">
+            <div class="section-header" style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+              <h2 class="section-title">Built On Trust & Proof of Work</h2>
+              <p class="section-subtitle">Finding a professional is easy. Knowing who to trust is the problem. NOVA ADDIS solves this through transparent verification.</p>
+            </div>
+
+            <div class="trust-grid">
+              <div class="trust-card">
+                <div class="trust-icon">🔍</div>
+                <h4>1. Discover</h4>
+                <p>Search local professionals by exact service category and location across Addis Ababa.</p>
+              </div>
+              <div class="trust-card">
+                <div class="trust-icon">📊</div>
+                <h4>2. Evaluate</h4>
+                <p>Inspect genuine portfolio work samples, clear pricing, and authenticated customer reviews.</p>
+              </div>
+              <div class="trust-card">
+                <div class="trust-icon">💬</div>
+                <h4>3. Connect</h4>
+                <p>Send direct service requests with job details, photos, and preferred delivery time.</p>
+              </div>
+              <div class="trust-card">
+                <div class="trust-icon">🛡️</div>
+                <h4>4. Build Reputation</h4>
+                <p>Providers build real digital trust with every completed project and customer rating.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FEATURED PROVIDERS -->
+        <section class="section">
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title">Top Rated Professionals</h2>
+              <p class="section-subtitle">Skilled service providers ready for hire.</p>
+            </div>
+
+            <div class="provider-grid">
+              ${state.providers.map(p => renderProviderCardItem(p)).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderCategoryCard(title, icon) {
+      return `
+        <div class="category-card" onclick="navigateTo('search', {category: '${title}'})">
+          <div class="category-icon">${icon}</div>
+          <div class="category-title">${title}</div>
+        </div>
+      `;
+    }
+
+    function renderProviderCardItem(provider) {
+      return `
+        <div class="provider-card">
+          <div>
+            <div class="provider-header">
+              <div class="provider-avatar">${provider.name.split(' ').map(n=>n[0]).join('')}</div>
+              <div class="provider-info">
+                <h3>${provider.name}</h3>
+                <div class="provider-title">${provider.title}</div>
+                <div class="provider-meta">
+                  <span class="rating">★ ${provider.rating}</span>
+                  <span style="color: var(--text-muted);">(${provider.reviewsCount} reviews)</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
+              📍 ${provider.location} • 💼 ${provider.experience} exp.
+            </div>
+
+            <div class="services-tags">
+              ${provider.services.map(s => `<span class="service-tag">${s.name}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn btn-secondary btn-sm btn-block" onclick="navigateTo('provider-detail', {providerId: '${provider.id}'})">View Profile</button>
+            <button class="btn btn-primary btn-sm btn-block" onclick="navigateTo('request-service', {providerId: '${provider.id}'})">Request Service</button>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ------------------------------------------------------------
+       PAGE TEMPLATES: SEARCH & DISCOVERY
+       ------------------------------------------------------------ */
+    function renderSearch() {
+      const filtered = state.providers.filter(p => {
+        const matchesCategory = state.selectedCategory === 'All' || p.category === state.selectedCategory;
+        const matchesQuery = p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                             p.title.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                             p.category.toLowerCase().includes(state.searchQuery.toLowerCase());
+        return matchesCategory && matchesQuery;
+      });
+
+      return `
+        <div class="container" style="padding-top: 32px; padding-bottom: 64px;">
+          <div style="margin-bottom: 24px;">
+            <h1 class="section-title">Find a Local Specialist</h1>
+            <p class="section-subtitle">Browse through top providers in Addis Ababa.</p>
+          </div>
+
+          <!-- Search & Filter Control Bar -->
+          <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px; margin-bottom: 32px; display: flex; gap: 16px; flex-wrap: wrap;">
+            <div style="flex: 2; min-width: 240px;">
+              <input type="text" class="input" placeholder="Search by service or specialist name..." value="${state.searchQuery}" oninput="handleSearchInput(this.value)">
+            </div>
+            <div style="flex: 1; min-width: 180px;">
+              <select class="select" onchange="handleCategoryFilter(this.value)">
+                <option value="All" ${state.selectedCategory === 'All' ? 'selected' : ''}>All Categories</option>
+                <option value="Phone Repair" ${state.selectedCategory === 'Phone Repair' ? 'selected' : ''}>Phone Repair</option>
+                <option value="Electrical" ${state.selectedCategory === 'Electrical' ? 'selected' : ''}>Electrical</option>
+                <option value="Web Development" ${state.selectedCategory === 'Web Development' ? 'selected' : ''}>Web Development</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Results -->
+          ${filtered.length === 0 ? `
+            <div style="text-align: center; padding: 64px 0; color: var(--text-secondary);">
+              <h3>No professionals found</h3>
+              <p style="margin-top: 8px;">Try clearing search keywords or selecting another category.</p>
+              <button class="btn btn-secondary btn-sm" style="margin-top: 16px;" onclick="resetSearch()">Reset Filters</button>
+            </div>
+          ` : `
+            <div class="provider-grid">
+              ${filtered.map(p => renderProviderCardItem(p)).join('')}
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    function handleHeroSearch() {
+      const query = document.getElementById('hero-search-input').value;
+      state.searchQuery = query;
+      navigateTo('search');
+    }
+
+    function handleSearchInput(val) {
+      state.searchQuery = val;
+      renderApp();
+    }
+
+    function handleCategoryFilter(val) {
+      state.selectedCategory = val;
+      renderApp();
+    }
+
+    function resetSearch() {
+      state.searchQuery = '';
+      state.selectedCategory = 'All';
+      renderApp();
+    }
+
+    /* ------------------------------------------------------------
+       PAGE TEMPLATES: PROVIDER PROFILE
+       ------------------------------------------------------------ */
+    function renderProviderProfile() {
+      const p = state.providers.find(item => item.id === state.selectedProviderId) || state.providers[0];
+
+      return `
+        <!-- Profile Header -->
+        <div class="profile-hero">
+          <div class="container">
+            <div class="profile-header-flex">
+              <div class="profile-main-info">
+                <div class="profile-avatar-lg">${p.name.split(' ').map(n=>n[0]).join('')}</div>
+                <div>
+                  <h1 style="font-size: 28px; font-weight: 700;">${p.name}</h1>
+                  <p style="color: var(--text-secondary); font-weight: 500;">${p.title}</p>
+                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">📍 ${p.location} • 💼 ${p.experience} Experience</p>
+                  
+                  <div style="display: flex; gap: 12px; align-items: center; margin-top: 12px;">
+                    <span class="rating" style="font-size: 16px;">★ ${p.rating}</span>
+                    <span style="color: var(--text-secondary); font-size: 14px;">(${p.reviewsCount} reviews)</span>
+                    <span class="badge badge-success">✓ Verified Trust Profile</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px;">
+                <button class="btn btn-primary" onclick="navigateTo('request-service', {providerId: '${p.id}'})">Request Service</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Details Tabs -->
+        <div class="container" style="padding-top: 32px; padding-bottom: 64px;">
+          <div class="dashboard-layout" style="grid-template-columns: 1fr 320px;">
+            <div>
+              <!-- About -->
+              <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin-bottom: 12px;">About the Specialist</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6;">${p.bio}</p>
+              </div>
+
+              <!-- Offerings / Services -->
+              <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin-bottom: 16px;">Services Offered</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  ${p.services.map(s => `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg); border-radius: 8px;">
+                      <div>
+                        <div style="font-weight: 600;">${s.name}</div>
+                        <div style="font-size: 13px; color: var(--text-secondary);">${s.desc}</div>
+                      </div>
+                      <div style="text-align: right;">
+                        <div style="font-weight: 700; color: var(--primary);">${s.price}</div>
+                        <button class="btn btn-primary btn-sm" style="margin-top: 6px;" onclick="navigateTo('request-service', {providerId: '${p.id}'})">Request</button>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Portfolio Work Samples -->
+              <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin-bottom: 16px;">Work Portfolio & Proof of Quality</h3>
+                <div class="portfolio-grid">
+                  ${p.portfolio.map(item => `
+                    <div class="portfolio-item">
+                      <div class="portfolio-img">📷 Work Sample Preview</div>
+                      <div class="portfolio-info">
+                        <div class="portfolio-title">${item.title}</div>
+                        <div class="portfolio-desc">${item.desc}</div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Reviews -->
+              <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px;">
+                <h3 style="margin-bottom: 16px;">Customer Feedback (${p.reviews.length})</h3>
+                ${p.reviews.length === 0 ? '<p style="color: var(--text-muted);">No customer reviews submitted yet.</p>' : ''}
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                  ${p.reviews.map(r => `
+                    <div style="border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span style="font-weight: 600;">${r.customer}</span>
+                        <span class="rating">★ ${r.rating}</span>
+                      </div>
+                      <p style="font-size: 13px; color: var(--text-secondary);">${r.comment}</p>
+                      <span style="font-size: 11px; color: var(--text-muted);">${r.date}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <!-- Trust Verification Sidebar -->
+            <div>
+              <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 20px;">
+                <h4 style="margin-bottom: 12px; font-size: 16px;">Trust Signals</h4>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+                  <li style="display: flex; gap: 8px;">✔️ <span><strong>Identity Check:</strong> Document Verified</span></li>
+                  <li style="display: flex; gap: 8px;">✔️ <span><strong>Completed Jobs:</strong> ${p.completedCount} Projects</span></li>
+                  <li style="display: flex; gap: 8px;">✔️ <span><strong>Response Rate:</strong> &lt; 30 mins</span></li>
+                </ul>
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+                  <p style="font-size: 12px; color: var(--text-muted);">Verification status represents verified customer feedback and work samples on NOVA ADDIS.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ------------------------------------------------------------
+       PAGE TEMPLATES: REQUEST SERVICE FORM
+       ------------------------------------------------------------ */
+    function renderRequestServiceForm() {
+      const p = state.providers.find(item => item.id === state.selectedProviderId) || state.providers[0];
+
+      return `
+        <div class="container" style="max-width: 680px; padding-top: 40px; padding-bottom: 64px;">
+          <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 32px;">
+            <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Request a Service</h1>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Send job details to <strong>${p.name}</strong> (${p.title}).</p>
+
+            <form onsubmit="handleServiceRequestSubmit(event, '${p.id}', '${p.name}')">
+              <div class="form-group">
+                <label class="form-label">Select Service</label>
+                <select class="select" id="req-service-name">
+                  ${p.services.map(s => `<option value="${s.name}">${s.name} (${s.price})</option>`).join('')}
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Problem Description</label>
+                <textarea class="textarea" id="req-description" rows="4" placeholder="Describe what you need help with..." required></textarea>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label class="form-label">Preferred Date</label>
+                  <input type="date" class="input" id="req-date" required value="2026-10-08">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preferred Time</label>
+                  <select class="select" id="req-time">
+                    <option>Morning (9:00 AM - 12:00 PM)</option>
+                    <option>Afternoon (1:00 PM - 5:00 PM)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Your Location in Addis Ababa</label>
+                <input type="text" class="input" id="req-location" placeholder="e.g. Bole Atlas, Near Edna Mall" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Contact Phone Number</label>
+                <input type="tel" class="input" id="req-phone" placeholder="+251 9... " required value="+251 911 000 000">
+              </div>
+
+              <div style="display: flex; gap: 12px; margin-top: 24px;">
+                <button type="submit" class="btn btn-primary btn-block">Send Request</button>
+                <button type="button" class="btn btn-secondary" onclick="navigateTo('provider-detail', {providerId: '${p.id}'})">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleServiceRequestSubmit(e, providerId, providerName) {
+      e.preventDefault();
+      const serviceName = document.getElementById('req-service-name').value;
+      const description = document.getElementById('req-description').value;
+      const date = document.getElementById('req-date').value;
+      const preferredTime = document.getElementById('req-time').value;
+      const location = document.getElementById('req-location').value;
+
+      const newReq = {
+        id: `REQ-${Math.floor(1000 + Math.random() * 9000)}`,
+        providerId: providerId,
+        providerName: providerName,
+        customerName: 'Sample Customer',
+        serviceName: serviceName,
+        status: 'Pending',
+        date: date,
+        preferredTime: preferredTime,
+        location: location,
+        description: description,
+        timeline: [
+          { status: 'Request Sent', time: 'Just now', completed: true },
+          { status: 'Request Accepted', time: '-', completed: false },
+          { status: 'Service Started', time: '-', completed: false },
+          { status: 'Service Completed', time: '-', completed: false }
+        ]
+      };
+
+      state.requests.unshift(newReq);
+      saveState();
+      showToast('Service Request Sent Successfully!');
+      navigateTo('requests');
+    }
+
+    /* ------------------------------------------------------------
+       PAGE TEMPLATES: CUSTOMER REQUEST TRACKING
+       ------------------------------------------------------------ */
+    function renderMyRequests() {
+      return `
+        <div class="container" style="padding-top: 32px; padding-bottom: 64px;">
+          <h1 class="section-title">My Service Requests</h1>
+          <p class="section-subtitle" style="margin-bottom: 24px;">Track and manage active service interactions.</p>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Provider</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${state.requests.map(r => `
+                <tr>
+                  <td><strong>${r.id}</strong></td>
+                  <td>${r.providerName}</td>
+                  <td>${r.serviceName}</td>
+                  <td>${r.date}</td>
+                  <td>${renderStatusBadge(r.status)}</td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="navigateTo('request-detail', {requestId: '${r.id}'})">View Details</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderRequestDetail() {
+      const req = state.requests.find(r => r.id === state.selectedRequestId) || state.requests[0];
+
+      return `
+        <div class="container" style="max-width: 800px; padding-top: 32px; padding-bottom: 64px;">
+          <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <div>
+                <span style="font-size: 13px; color: var(--text-muted);">Request Reference: ${req.id}</span>
+                <h2 style="font-size: 22px;">${req.serviceName}</h2>
+              </div>
+              <div>${renderStatusBadge(req.status)}</div>
+            </div>
+
+            <!-- Timeline Tracker -->
+            <div class="timeline">
+              <div class="timeline-step ${req.timeline[0].completed ? 'completed' : ''}">
+                <div class="timeline-node">1</div>
+                <span>Sent</span>
+              </div>
+              <div class="timeline-step ${req.timeline[1].completed ? 'completed' : ''}">
+                <div class="timeline-node">2</div>
+                <span>Accepted</span>
+              </div>
+              <div class="timeline-step ${req.timeline[2].completed ? 'completed' : ''}">
+                <div class="timeline-node">3</div>
+                <span>In Progress</span>
+              </div>
+              <div class="timeline-step ${req.timeline[3].completed ? 'completed' : ''}">
+                <div class="timeline-node">4</div>
+                <span>Completed</span>
+              </div>
+            </div>
+
+            <div style="background: var(--bg); padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+              <h4 style="margin-bottom: 8px;">Service Details</h4>
+              <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 6px;"><strong>Provider:</strong> ${req.providerName}</p>
+              <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 6px;"><strong>Location:</strong> ${req.location}</p>
+              <p style="font-size: 14px; color: var(--text-secondary);"><strong>Description:</strong> ${req.description}</p>
+            </div>
+
+            ${req.status === 'Completed' ? `
+              <div style="border-top: 1px solid var(--border); padding-top: 20px;">
+                <h4 style="margin-bottom: 12px;">Submit Review & Feedback</h4>
+                <div class="form-group">
+                  <label class="form-label">Rating</label>
+                  <select class="select" id="review-rating">
+                    <option value="5">5 Stars - Excellent</option>
+                    <option value="4">4 Stars - Very Good</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Review Comment</label>
+                  <textarea class="textarea" id="review-comment" rows="3" placeholder="Share your experience..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="submitCustomerReview('${req.providerId}')">Submit Review</button>
+              </div>
+            ` : ''}
+
+            <div style="margin-top: 24px;">
+              <button class="btn btn-secondary btn-sm" onclick="navigateTo('requests')">← Back to Requests</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function submitCustomerReview(providerId) {
+      const rating = parseFloat(document.getElementById('review-rating').value);
+      const comment = document.getElementById('review-comment').value;
+
+      const provider = state.providers.find(p => p.id === providerId);
+      if (provider) {
+        provider.reviews.unshift({
+          customer: 'Sample Customer',
+          rating: rating,
+          date: '2026-10-07',
+          comment: comment || 'Service completed satisfactorily.'
+        });
+        saveState();
+        showToast('Thank you! Review submitted.');
+        navigateTo('provider-detail', {providerId: providerId});
+      }
+    }
+
+    /* ------------------------------------------------------------
+       PAGE TEMPLATES: PROVIDER DASHBOARD (PROVIDER ROLE)
+       ------------------------------------------------------------ */
+    function renderProviderLayout() {
+      const myProvider = state.providers[0]; // Active Provider: Dawit Abebe
+
+      return `
+        <div class="container dashboard-layout">
+          <aside>
+            <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">
+                <div class="provider-avatar">${myProvider.name.split(' ').map(n=>n[0]).join('')}</div>
+                <div>
+                  <div style="font-weight: 600; font-size: 14px;">${myProvider.name}</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">${myProvider.title}</div>
+                </div>
+              </div>
+
+              <ul class="sidebar-nav">
+                <li class="sidebar-link active"><span>📊 Dashboard</span></li>
+                <li class="sidebar-link" onclick="openAddServiceModal()"><span>➕ Add Service</span></li>
+                <li class="sidebar-link" onclick="openAddPortfolioModal()"><span>🖼️ Add Portfolio</span></li>
+              </ul>
+            </div>
+          </aside>
+
+          <main>
+            <div style="margin-bottom: 24px;">
+              <h1 class="section-title">Provider Dashboard</h1>
+              <p class="section-subtitle">Manage customer requests and build digital reputation.</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value">${state.requests.length}</div>
+                <div class="stat-label">Total Requests</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">★ ${myProvider.rating}</div>
+                <div class="stat-label">Trust Score Rating</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">${myProvider.completedCount}</div>
+                <div class="stat-label">Completed Jobs</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">${myProvider.services.length}</div>
+                <div class="stat-label">Active Services</div>
+              </div>
+            </div>
+
+            <!-- Incoming Service Requests Management -->
+            <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px; margin-bottom: 32px;">
+              <h3 style="margin-bottom: 16px;">Incoming & Active Requests</h3>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th>Service</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${state.requests.map(r => `
+                    <tr>
+                      <td><strong>${r.customerName}</strong></td>
+                      <td>${r.serviceName}</td>
+                      <td>${r.location}</td>
+                      <td>${renderStatusBadge(r.status)}</td>
+                      <td>
+                        ${r.status === 'Pending' ? `
+                          <button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'Accepted')">Accept</button>
+                        ` : ''}
+                        ${r.status === 'Accepted' ? `
+                          <button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'In Progress')">Start Job</button>
+                        ` : ''}
+                        ${r.status === 'In Progress' ? `
+                          <button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'Completed')">Mark Complete</button>
+                        ` : ''}
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </main>
+        </div>
+      `;
+    }
+
+    function updateReqStatus(reqId, newStatus) {
+      const req = state.requests.find(r => r.id === reqId);
+      if (req) {
+        req.status = newStatus;
+        if (newStatus === 'Accepted') req.timeline[1].completed = true;
+        if (newStatus === 'In Progress') req.timeline[2].completed = true;
+        if (newStatus === 'Completed') req.timeline[3].completed = true;
+        saveState();
+        showToast(`Request updated to ${newStatus}`);
+        renderApp();
+      }
+    }
+
+    /* ------------------------------------------------------------
+       MODALS: ADD SERVICE & PORTFOLIO
+       ------------------------------------------------------------ */
+    function openAddServiceModal() {
+      document.getElementById('modal-title').textContent = 'Add New Service Offering';
+      document.getElementById('modal-body').innerHTML = `
+        <form onsubmit="handleAddServiceSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Service Title</label>
+            <input type="text" id="m-service-name" class="input" placeholder="e.g. Battery Replacement" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Price / Rate</label>
+            <input type="text" id="m-service-price" class="input" placeholder="e.g. 1,000 ETB" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Short Description</label>
+            <textarea id="m-service-desc" class="textarea" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Save Service</button>
+        </form>
+      `;
+      document.getElementById('modal-overlay').classList.add('active');
+    }
+
+    function handleAddServiceSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('m-service-name').value;
+      const price = document.getElementById('m-service-price').value;
+      const desc = document.getElementById('m-service-desc').value;
+
+      state.providers[0].services.push({ id: `s_${Date.now()}`, name, price, desc });
+      saveState();
+      closeModalDirect();
+      showToast('Service added successfully');
+      renderApp();
+    }
+
+    function openAddPortfolioModal() {
+      document.getElementById('modal-title').textContent = 'Add Portfolio Work Sample';
+      document.getElementById('modal-body').innerHTML = `
+        <form onsubmit="handleAddPortfolioSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Project Title</label>
+            <input type="text" id="m-port-title" class="input" placeholder="e.g. OLED Display Repair" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description of Completed Work</label>
+            <textarea id="m-port-desc" class="textarea" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Add Work Sample</button>
+        </form>
+      `;
+      document.getElementById('modal-overlay').classList.add('active');
+    }
+
+    function handleAddPortfolioSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('m-port-title').value;
+      const desc = document.getElementById('m-port-desc').value;
+
+      state.providers[0].portfolio.push({ title, desc, category: 'General' });
+      saveState();
+      closeModalDirect();
+      showToast('Portfolio sample uploaded!');
+      renderApp();
+    }
+
+    function closeModal(e) {
+      if (e.target.id === 'modal-overlay') closeModalDirect();
+    }
+    function closeModalDirect() {
+      document.getElementById('modal-overlay').classList.remove('active');
+    }
+
+    /* ------------------------------------------------------------
+       INFORMATIONAL PAGES (ABOUT & TRUST)
+       ------------------------------------------------------------ */
+    function renderCategories() {
+      return `
+        <div class="container" style="padding-top: 32px; padding-bottom: 64px;">
+          <h1 class="section-title">All Service Categories</h1>
+          <p class="section-subtitle" style="margin-bottom: 32px;">Choose a specialized service trade.</p>
+          <div class="categories-grid">
+            ${renderCategoryCard('Phone Repair', '📱')}
+            ${renderCategoryCard('Electrical', '⚡')}
+            ${renderCategoryCard('Electronics', '💻')}
+            ${renderCategoryCard('Plumbing', '🚰')}
+            ${renderCategoryCard('Mechanics', '🔧')}
+            ${renderCategoryCard('Photography', '📷')}
+            ${renderCategoryCard('Tutoring', '📚')}
+            ${renderCategoryCard('Web Development', '🌐')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAbout() {
+      return `
+        <div class="container" style="max-width: 800px; padding-top: 40px; padding-bottom: 64px;">
+          <span class="hero-eyebrow">ABOUT NOVA ADDIS</span>
+          <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 16px;">Technology Should Solve Real Local Problems.</h1>
+          <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 32px;">
+            NOVA ADDIS is focused on turning everyday problems into practical digital solutions. In local markets, finding skilled service professionals is easy—knowing who to trust is the real challenge.
+          </p>
+
+          <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px;">
+            <h3 style="margin-bottom: 16px;">Our Core Operating Principles</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
+              <li>🎯 <strong>Identify Real Local Needs:</strong> Focus on real consumer trust bottlenecks in Addis Ababa.</li>
+              <li>💡 <strong>Design Simple Solutions:</strong> No unnecessary complexity or confusing Silicon Valley clutter.</li>
+              <li>🧪 <strong>Test with Real Users:</strong> Iterative improvement based on verified service feedback.</li>
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTrustPage() {
+      return `
+        <div class="container" style="max-width: 800px; padding-top: 40px; padding-bottom: 64px;">
+          <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Trust Should Be Earned, Not Assumed.</h1>
+          <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 32px;">Our transparent trust architecture ensures accountability.</p>
+
+          <div class="trust-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="trust-card">
+              <h4>Verified Proof of Work</h4>
+              <p>Specialists showcase genuine portfolio photos of completed repairs and installations.</p>
+            </div>
+            <div class="trust-card">
+              <h4>Authenticated Customer Reviews</h4>
+              <p>Reviews can only be submitted after a verified, completed service request interaction.</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderBusinessModel() {
+      return `
+        <div class="container" style="max-width: 800px; padding-top: 40px; padding-bottom: 64px;">
+          <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Business & Sustainability Model</h1>
+          <p style="font-size: 15px; color: var(--text-secondary); margin-bottom: 24px;">Potential revenue architecture — subject to local validation.</p>
+
+          <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px;">
+            <p style="margin-bottom: 12px;">1. <strong>Free Basic Listing:</strong> Service providers create profiles at zero entry cost.</p>
+            <p style="margin-bottom: 12px;">2. <strong>Optional Provider Promotion:</strong> Featured placement in search results for high-rated experts.</p>
+            <p>3. <strong>Transaction & Escrow Convenience Fees:</strong> Digital payment integration and job guarantee models.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ------------------------------------------------------------
+       UI UTILITIES: BADGES & TOASTS
+       ------------------------------------------------------------ */
+    function renderStatusBadge(status) {
+      switch (status) {
+        case 'Completed': return `<span class="badge badge-success">✓ Completed</span>`;
+        case 'In Progress': return `<span class="badge badge-warning">⏳ In Progress</span>`;
+        case 'Accepted': return `<span class="badge badge-neutral">✓ Accepted</span>`;
+        case 'Pending': return `<span class="badge badge-warning">🕒 Pending</span>`;
+        default: return `<span class="badge badge-neutral">${status}</span>`;
+      }
+    }
+
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span>ℹ️</span> <span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 200);
+      }, 3000);
+    }
+
+    /* ------------------------------------------------------------
+       APP INITIALIZATION
+       ------------------------------------------------------------ */
+    window.addEventListener('DOMContentLoaded', () => {
+      renderApp();
+    });
+  </script>
 </body>
 </html>
