@@ -202,7 +202,7 @@
     .badge-neutral { background: #EAEFF5; color: var(--text-secondary); }
 
     /* ============================================================
-       NAVIGATION HEADER
+       NAVIGATION HEADER & BRANDING
        ============================================================ */
     .header {
       background-color: var(--white);
@@ -222,28 +222,19 @@
       width: 100%;
     }
 
+    /* LOGO USING ORIGINAL LOGO.PNG WITH RESPONSIVE SIZING */
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 20px;
-      color: var(--dark);
       text-decoration: none;
     }
 
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, var(--cyan), var(--bright-blue));
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-weight: 700;
-      font-size: 16px;
+    .logo-img {
+      height: 40px; /* Desktop Size */
+      width: auto;
+      object-fit: contain;
+      display: block;
+      transition: height 0.2s ease;
     }
 
     .nav-links {
@@ -334,6 +325,7 @@
       font-size: 11px;
       color: var(--text-secondary);
       gap: 2px;
+      cursor: pointer;
     }
 
     .mobile-nav-item.active {
@@ -862,30 +854,6 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
-    /* Tabs */
-    .tabs {
-      display: flex;
-      gap: 8px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
-    }
-
-    .tab-btn {
-      padding: 10px 16px;
-      border: none;
-      background: transparent;
-      font-weight: 500;
-      color: var(--text-secondary);
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: all 0.15s ease;
-    }
-
-    .tab-btn.active {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
-    }
-
     /* Footer */
     .footer {
       background: var(--dark);
@@ -900,14 +868,6 @@
       grid-template-columns: 2fr 1fr 1fr 1fr;
       gap: 40px;
       margin-bottom: 40px;
-    }
-
-    .footer-logo {
-      color: var(--white);
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 12px;
-      display: inline-block;
     }
 
     .footer-links {
@@ -983,23 +943,63 @@
     }
 
     /* ============================================================
-       RESPONSIVE BREAKPOINTS
+       RESPONSIVE BREAKPOINTS (DESKTOP & MOBILE SIZING)
        ============================================================ */
+
+    /* DESKTOP STYLING (Screen width > 900px) */
+    @media (min-width: 901px) {
+      .logo-img {
+        height: 40px; /* Desktop logo size */
+      }
+      .mobile-nav {
+        display: none !important;
+      }
+    }
+
+    /* MOBILE & TABLET STYLING (Screen width <= 900px) */
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .trust-grid { grid-template-columns: 1fr 1fr; }
-      .dashboard-layout { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .nav-links { display: none; }
-      .mobile-nav { display: block; }
-      body { padding-bottom: 60px; }
+      .logo-img {
+        height: 32px; /* Mobile logo size */
+      }
+      .hero-grid { 
+        grid-template-columns: 1fr; 
+      }
+      .trust-grid { 
+        grid-template-columns: 1fr 1fr; 
+      }
+      .dashboard-layout { 
+        grid-template-columns: 1fr; 
+      }
+      .stats-grid { 
+        grid-template-columns: 1fr 1fr; 
+      }
+      .footer-grid { 
+        grid-template-columns: 1fr 1fr; 
+      }
+      .nav-links { 
+        display: none; /* Hide header desktop menu on mobile */
+      }
+      .mobile-nav { 
+        display: block; /* Show mobile bottom nav */
+      }
+      body { 
+        padding-bottom: 60px; /* Space for mobile nav bar */
+      }
     }
 
     @media (max-width: 600px) {
-      .trust-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: 34px; }
+      .trust-grid { 
+        grid-template-columns: 1fr; 
+      }
+      .stats-grid { 
+        grid-template-columns: 1fr; 
+      }
+      .hero-title { 
+        font-size: 32px; 
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -1008,11 +1008,12 @@
   <!-- HEADER NAVIGATION -->
   <header class="header">
     <div class="container header-content">
+      <!-- LOGO USING LOGO.PNG ONLY -->
       <a href="#" class="logo" onclick="navigateTo('home')">
-        <div class="logo-mark"><img src="logo.png" alt=""></div>
-        <span>NOVA ADDIS</span>
+        <img src="logo.png" alt="NOVA ADDIS Logo" class="logo-img">
       </a>
 
+      <!-- DESKTOP NAVIGATION LINKS -->
       <ul class="nav-links">
         <li><a href="#" id="nav-home" class="active" onclick="navigateTo('home')">Home</a></li>
         <li><a href="#" id="nav-search" onclick="navigateTo('search')">Find a Service</a></li>
@@ -1041,7 +1042,10 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo">NOVA ADDIS</div>
+          <!-- FOOTER LOGO -->
+          <div style="margin-bottom: 12px;">
+            <img src="logo.png" alt="NOVA ADDIS Logo" style="height: 36px; filter: brightness(0) invert(1);">
+          </div>
           <p>IDEAS INTO DIGITAL SOLUTIONS</p>
           <p style="margin-top: 12px; font-size: 13px;">Connecting customers with trusted local professionals across Addis Ababa, Ethiopia.</p>
         </div>
@@ -1069,7 +1073,7 @@
     </div>
   </footer>
 
-  <!-- MOBILE BOTTOM NAVIGATION -->
+  <!-- MOBILE BOTTOM NAVIGATION (MOBILE SIZE ONLY) -->
   <nav class="mobile-nav">
     <ul class="mobile-nav-items">
       <li class="mobile-nav-item active" onclick="navigateTo('home')">
@@ -1105,9 +1109,6 @@
        JAVASCRIPT APP LOGIC & STATE
        ============================================================ -->
   <script>
-    /* ------------------------------------------------------------
-       DEMO SEED DATA & LOCALSTORAGE INITIALIZATION
-       ------------------------------------------------------------ */
     const INITIAL_PROVIDERS = [
       {
         id: 'p1',
@@ -1187,7 +1188,7 @@
         providerName: 'Dawit Abebe',
         customerName: 'Sample Customer',
         serviceName: 'Screen Repair & Replacement',
-        status: 'In Progress', // Pending, Accepted, In Progress, Completed, Cancelled
+        status: 'In Progress',
         date: '2026-10-06',
         preferredTime: 'Morning (9:00 AM)',
         location: 'Bole Atlas, Addis Ababa',
@@ -1203,17 +1204,14 @@
 
     // Global App State
     let state = {
-      currentRole: 'customer', // 'customer' or 'provider'
+      currentRole: 'customer',
       currentPage: 'home',
       providers: JSON.parse(localStorage.getItem('na_providers')) || INITIAL_PROVIDERS,
       requests: JSON.parse(localStorage.getItem('na_requests')) || INITIAL_REQUESTS,
       selectedProviderId: 'p1',
       selectedRequestId: 'REQ-1001',
       searchQuery: '',
-      selectedCategory: 'All',
-      notifications: [
-        { id: 'n1', title: 'Service In Progress', text: 'Dawit Abebe started working on REQ-1001.', read: false, time: '2h ago' }
-      ]
+      selectedCategory: 'All'
     };
 
     function saveState() {
@@ -1221,16 +1219,12 @@
       localStorage.setItem('na_requests', JSON.stringify(state.requests));
     }
 
-    /* ------------------------------------------------------------
-       ROUTING & NAVIGATION
-       ------------------------------------------------------------ */
     function navigateTo(page, params = {}) {
       state.currentPage = page;
       if (params.providerId) state.selectedProviderId = params.providerId;
       if (params.requestId) state.selectedRequestId = params.requestId;
       if (params.category) state.selectedCategory = params.category;
       
-      // Update nav active link
       document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
       const activeNav = document.getElementById(`nav-${page}`);
       if (activeNav) activeNav.classList.add('active');
@@ -1253,9 +1247,6 @@
       }
     }
 
-    /* ------------------------------------------------------------
-       RENDER ENGINE
-       ------------------------------------------------------------ */
     function renderApp() {
       const root = document.getElementById('app-root');
       
@@ -1303,12 +1294,8 @@
       }
     }
 
-    /* ------------------------------------------------------------
-       PAGE TEMPLATES: HOME
-       ------------------------------------------------------------ */
     function renderHome() {
       return `
-        <!-- HERO -->
         <section class="hero-section">
           <div class="container hero-grid">
             <div>
@@ -1330,7 +1317,6 @@
               </div>
             </div>
 
-            <!-- HERO PREVIEW CARD -->
             <div class="hero-preview-card">
               <span class="hero-preview-badge">Featured Verified Provider</span>
               <div class="provider-header">
@@ -1362,7 +1348,6 @@
           </div>
         </section>
 
-        <!-- CATEGORIES SECTION -->
         <section class="section">
           <div class="container">
             <div class="section-header">
@@ -1383,7 +1368,6 @@
           </div>
         </section>
 
-        <!-- TRUST PHILOSOPHY -->
         <section class="section" style="background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
           <div class="container">
             <div class="section-header" style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
@@ -1416,7 +1400,6 @@
           </div>
         </section>
 
-        <!-- FEATURED PROVIDERS -->
         <section class="section">
           <div class="container">
             <div class="section-header">
@@ -1474,9 +1457,6 @@
       `;
     }
 
-    /* ------------------------------------------------------------
-       PAGE TEMPLATES: SEARCH & DISCOVERY
-       ------------------------------------------------------------ */
     function renderSearch() {
       const filtered = state.providers.filter(p => {
         const matchesCategory = state.selectedCategory === 'All' || p.category === state.selectedCategory;
@@ -1493,7 +1473,6 @@
             <p class="section-subtitle">Browse through top providers in Addis Ababa.</p>
           </div>
 
-          <!-- Search & Filter Control Bar -->
           <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px; margin-bottom: 32px; display: flex; gap: 16px; flex-wrap: wrap;">
             <div style="flex: 2; min-width: 240px;">
               <input type="text" class="input" placeholder="Search by service or specialist name..." value="${state.searchQuery}" oninput="handleSearchInput(this.value)">
@@ -1508,7 +1487,6 @@
             </div>
           </div>
 
-          <!-- Results -->
           ${filtered.length === 0 ? `
             <div style="text-align: center; padding: 64px 0; color: var(--text-secondary);">
               <h3>No professionals found</h3>
@@ -1546,14 +1524,10 @@
       renderApp();
     }
 
-    /* ------------------------------------------------------------
-       PAGE TEMPLATES: PROVIDER PROFILE
-       ------------------------------------------------------------ */
     function renderProviderProfile() {
       const p = state.providers.find(item => item.id === state.selectedProviderId) || state.providers[0];
 
       return `
-        <!-- Profile Header -->
         <div class="profile-hero">
           <div class="container">
             <div class="profile-header-flex">
@@ -1579,17 +1553,14 @@
           </div>
         </div>
 
-        <!-- Profile Details Tabs -->
         <div class="container" style="padding-top: 32px; padding-bottom: 64px;">
           <div class="dashboard-layout" style="grid-template-columns: 1fr 320px;">
             <div>
-              <!-- About -->
               <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px; margin-bottom: 24px;">
                 <h3 style="margin-bottom: 12px;">About the Specialist</h3>
                 <p style="color: var(--text-secondary); line-height: 1.6;">${p.bio}</p>
               </div>
 
-              <!-- Offerings / Services -->
               <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px; margin-bottom: 24px;">
                 <h3 style="margin-bottom: 16px;">Services Offered</h3>
                 <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -1608,7 +1579,6 @@
                 </div>
               </div>
 
-              <!-- Portfolio Work Samples -->
               <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px; margin-bottom: 24px;">
                 <h3 style="margin-bottom: 16px;">Work Portfolio & Proof of Quality</h3>
                 <div class="portfolio-grid">
@@ -1624,7 +1594,6 @@
                 </div>
               </div>
 
-              <!-- Reviews -->
               <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px;">
                 <h3 style="margin-bottom: 16px;">Customer Feedback (${p.reviews.length})</h3>
                 ${p.reviews.length === 0 ? '<p style="color: var(--text-muted);">No customer reviews submitted yet.</p>' : ''}
@@ -1643,7 +1612,6 @@
               </div>
             </div>
 
-            <!-- Trust Verification Sidebar -->
             <div>
               <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 20px;">
                 <h4 style="margin-bottom: 12px; font-size: 16px;">Trust Signals</h4>
@@ -1652,9 +1620,6 @@
                   <li style="display: flex; gap: 8px;">✔️ <span><strong>Completed Jobs:</strong> ${p.completedCount} Projects</span></li>
                   <li style="display: flex; gap: 8px;">✔️ <span><strong>Response Rate:</strong> &lt; 30 mins</span></li>
                 </ul>
-                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
-                  <p style="font-size: 12px; color: var(--text-muted);">Verification status represents verified customer feedback and work samples on NOVA ADDIS.</p>
-                </div>
               </div>
             </div>
           </div>
@@ -1662,9 +1627,6 @@
       `;
     }
 
-    /* ------------------------------------------------------------
-       PAGE TEMPLATES: REQUEST SERVICE FORM
-       ------------------------------------------------------------ */
     function renderRequestServiceForm() {
       const p = state.providers.find(item => item.id === state.selectedProviderId) || state.providers[0];
 
@@ -1754,9 +1716,6 @@
       navigateTo('requests');
     }
 
-    /* ------------------------------------------------------------
-       PAGE TEMPLATES: CUSTOMER REQUEST TRACKING
-       ------------------------------------------------------------ */
     function renderMyRequests() {
       return `
         <div class="container" style="padding-top: 32px; padding-bottom: 64px;">
@@ -1807,7 +1766,6 @@
               <div>${renderStatusBadge(req.status)}</div>
             </div>
 
-            <!-- Timeline Tracker -->
             <div class="timeline">
               <div class="timeline-step ${req.timeline[0].completed ? 'completed' : ''}">
                 <div class="timeline-node">1</div>
@@ -1834,24 +1792,6 @@
               <p style="font-size: 14px; color: var(--text-secondary);"><strong>Description:</strong> ${req.description}</p>
             </div>
 
-            ${req.status === 'Completed' ? `
-              <div style="border-top: 1px solid var(--border); padding-top: 20px;">
-                <h4 style="margin-bottom: 12px;">Submit Review & Feedback</h4>
-                <div class="form-group">
-                  <label class="form-label">Rating</label>
-                  <select class="select" id="review-rating">
-                    <option value="5">5 Stars - Excellent</option>
-                    <option value="4">4 Stars - Very Good</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Review Comment</label>
-                  <textarea class="textarea" id="review-comment" rows="3" placeholder="Share your experience..."></textarea>
-                </div>
-                <button class="btn btn-primary" onclick="submitCustomerReview('${req.providerId}')">Submit Review</button>
-              </div>
-            ` : ''}
-
             <div style="margin-top: 24px;">
               <button class="btn btn-secondary btn-sm" onclick="navigateTo('requests')">← Back to Requests</button>
             </div>
@@ -1860,29 +1800,8 @@
       `;
     }
 
-    function submitCustomerReview(providerId) {
-      const rating = parseFloat(document.getElementById('review-rating').value);
-      const comment = document.getElementById('review-comment').value;
-
-      const provider = state.providers.find(p => p.id === providerId);
-      if (provider) {
-        provider.reviews.unshift({
-          customer: 'Sample Customer',
-          rating: rating,
-          date: '2026-10-07',
-          comment: comment || 'Service completed satisfactorily.'
-        });
-        saveState();
-        showToast('Thank you! Review submitted.');
-        navigateTo('provider-detail', {providerId: providerId});
-      }
-    }
-
-    /* ------------------------------------------------------------
-       PAGE TEMPLATES: PROVIDER DASHBOARD (PROVIDER ROLE)
-       ------------------------------------------------------------ */
     function renderProviderLayout() {
-      const myProvider = state.providers[0]; // Active Provider: Dawit Abebe
+      const myProvider = state.providers[0];
 
       return `
         <div class="container dashboard-layout">
@@ -1910,7 +1829,6 @@
               <p class="section-subtitle">Manage customer requests and build digital reputation.</p>
             </div>
 
-            <!-- Stats -->
             <div class="stats-grid">
               <div class="stat-card">
                 <div class="stat-value">${state.requests.length}</div>
@@ -1930,7 +1848,6 @@
               </div>
             </div>
 
-            <!-- Incoming Service Requests Management -->
             <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px; margin-bottom: 32px;">
               <h3 style="margin-bottom: 16px;">Incoming & Active Requests</h3>
               <table class="data-table">
@@ -1951,15 +1868,9 @@
                       <td>${r.location}</td>
                       <td>${renderStatusBadge(r.status)}</td>
                       <td>
-                        ${r.status === 'Pending' ? `
-                          <button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'Accepted')">Accept</button>
-                        ` : ''}
-                        ${r.status === 'Accepted' ? `
-                          <button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'In Progress')">Start Job</button>
-                        ` : ''}
-                        ${r.status === 'In Progress' ? `
-                          <button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'Completed')">Mark Complete</button>
-                        ` : ''}
+                        ${r.status === 'Pending' ? `<button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'Accepted')">Accept</button>` : ''}
+                        ${r.status === 'Accepted' ? `<button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'In Progress')">Start Job</button>` : ''}
+                        ${r.status === 'In Progress' ? `<button class="btn btn-primary btn-sm" onclick="updateReqStatus('${r.id}', 'Completed')">Mark Complete</button>` : ''}
                       </td>
                     </tr>
                   `).join('')}
@@ -1984,84 +1895,6 @@
       }
     }
 
-    /* ------------------------------------------------------------
-       MODALS: ADD SERVICE & PORTFOLIO
-       ------------------------------------------------------------ */
-    function openAddServiceModal() {
-      document.getElementById('modal-title').textContent = 'Add New Service Offering';
-      document.getElementById('modal-body').innerHTML = `
-        <form onsubmit="handleAddServiceSubmit(event)">
-          <div class="form-group">
-            <label class="form-label">Service Title</label>
-            <input type="text" id="m-service-name" class="input" placeholder="e.g. Battery Replacement" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Price / Rate</label>
-            <input type="text" id="m-service-price" class="input" placeholder="e.g. 1,000 ETB" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Short Description</label>
-            <textarea id="m-service-desc" class="textarea" rows="3" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Save Service</button>
-        </form>
-      `;
-      document.getElementById('modal-overlay').classList.add('active');
-    }
-
-    function handleAddServiceSubmit(e) {
-      e.preventDefault();
-      const name = document.getElementById('m-service-name').value;
-      const price = document.getElementById('m-service-price').value;
-      const desc = document.getElementById('m-service-desc').value;
-
-      state.providers[0].services.push({ id: `s_${Date.now()}`, name, price, desc });
-      saveState();
-      closeModalDirect();
-      showToast('Service added successfully');
-      renderApp();
-    }
-
-    function openAddPortfolioModal() {
-      document.getElementById('modal-title').textContent = 'Add Portfolio Work Sample';
-      document.getElementById('modal-body').innerHTML = `
-        <form onsubmit="handleAddPortfolioSubmit(event)">
-          <div class="form-group">
-            <label class="form-label">Project Title</label>
-            <input type="text" id="m-port-title" class="input" placeholder="e.g. OLED Display Repair" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Description of Completed Work</label>
-            <textarea id="m-port-desc" class="textarea" rows="3" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Add Work Sample</button>
-        </form>
-      `;
-      document.getElementById('modal-overlay').classList.add('active');
-    }
-
-    function handleAddPortfolioSubmit(e) {
-      e.preventDefault();
-      const title = document.getElementById('m-port-title').value;
-      const desc = document.getElementById('m-port-desc').value;
-
-      state.providers[0].portfolio.push({ title, desc, category: 'General' });
-      saveState();
-      closeModalDirect();
-      showToast('Portfolio sample uploaded!');
-      renderApp();
-    }
-
-    function closeModal(e) {
-      if (e.target.id === 'modal-overlay') closeModalDirect();
-    }
-    function closeModalDirect() {
-      document.getElementById('modal-overlay').classList.remove('active');
-    }
-
-    /* ------------------------------------------------------------
-       INFORMATIONAL PAGES (ABOUT & TRUST)
-       ------------------------------------------------------------ */
     function renderCategories() {
       return `
         <div class="container" style="padding-top: 32px; padding-bottom: 64px;">
@@ -2087,17 +1920,8 @@
           <span class="hero-eyebrow">ABOUT NOVA ADDIS</span>
           <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 16px;">Technology Should Solve Real Local Problems.</h1>
           <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 32px;">
-            NOVA ADDIS is focused on turning everyday problems into practical digital solutions. In local markets, finding skilled service professionals is easy—knowing who to trust is the real challenge.
+            NOVA ADDIS is focused on turning everyday problems into practical digital solutions.
           </p>
-
-          <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px;">
-            <h3 style="margin-bottom: 16px;">Our Core Operating Principles</h3>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
-              <li>🎯 <strong>Identify Real Local Needs:</strong> Focus on real consumer trust bottlenecks in Addis Ababa.</li>
-              <li>💡 <strong>Design Simple Solutions:</strong> No unnecessary complexity or confusing Silicon Valley clutter.</li>
-              <li>🧪 <strong>Test with Real Users:</strong> Iterative improvement based on verified service feedback.</li>
-            </ul>
-          </div>
         </div>
       `;
     }
@@ -2107,17 +1931,6 @@
         <div class="container" style="max-width: 800px; padding-top: 40px; padding-bottom: 64px;">
           <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Trust Should Be Earned, Not Assumed.</h1>
           <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 32px;">Our transparent trust architecture ensures accountability.</p>
-
-          <div class="trust-grid" style="grid-template-columns: 1fr 1fr;">
-            <div class="trust-card">
-              <h4>Verified Proof of Work</h4>
-              <p>Specialists showcase genuine portfolio photos of completed repairs and installations.</p>
-            </div>
-            <div class="trust-card">
-              <h4>Authenticated Customer Reviews</h4>
-              <p>Reviews can only be submitted after a verified, completed service request interaction.</p>
-            </div>
-          </div>
         </div>
       `;
     }
@@ -2125,21 +1938,11 @@
     function renderBusinessModel() {
       return `
         <div class="container" style="max-width: 800px; padding-top: 40px; padding-bottom: 64px;">
-          <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Business & Sustainability Model</h1>
-          <p style="font-size: 15px; color: var(--text-secondary); margin-bottom: 24px;">Potential revenue architecture — subject to local validation.</p>
-
-          <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 24px;">
-            <p style="margin-bottom: 12px;">1. <strong>Free Basic Listing:</strong> Service providers create profiles at zero entry cost.</p>
-            <p style="margin-bottom: 12px;">2. <strong>Optional Provider Promotion:</strong> Featured placement in search results for high-rated experts.</p>
-            <p>3. <strong>Transaction & Escrow Convenience Fees:</strong> Digital payment integration and job guarantee models.</p>
-          </div>
+          <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Business Model</h1>
         </div>
       `;
     }
 
-    /* ------------------------------------------------------------
-       UI UTILITIES: BADGES & TOASTS
-       ------------------------------------------------------------ */
     function renderStatusBadge(status) {
       switch (status) {
         case 'Completed': return `<span class="badge badge-success">✓ Completed</span>`;
@@ -2163,9 +1966,13 @@
       }, 3000);
     }
 
-    /* ------------------------------------------------------------
-       APP INITIALIZATION
-       ------------------------------------------------------------ */
+    function closeModal(e) {
+      if (e.target.id === 'modal-overlay') closeModalDirect();
+    }
+    function closeModalDirect() {
+      document.getElementById('modal-overlay').classList.remove('active');
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       renderApp();
     });
